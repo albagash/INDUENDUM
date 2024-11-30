@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
+using INDUENDUM_API.Identity.Models;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -30,7 +31,7 @@ public class UsersController : ControllerBase
     // POST: /api/users
     [HttpPost]
     [AllowAnonymous] // Lejon krijimin e përdoruesve pa autentifikim
-    public async Task<IActionResult> CreateUser([FromBody] RegisterUserModel model)
+    public async Task<IActionResult> CreateUser([FromBody] RegisteruserModel model)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
@@ -86,19 +87,4 @@ public class UsersController : ControllerBase
     }
 }
 
-// Model për regjistrimin e përdoruesve
-public class RegisterUserModel
-{
-    [Required(ErrorMessage = "Email-i është i detyrueshëm.")]
-    [EmailAddress(ErrorMessage = "Ju lutemi vendosni një email të vlefshëm.")]
-    public string Email { get; set; } = string.Empty;
 
-    [Required(ErrorMessage = "Fjalëkalimi është i detyrueshëm.")]
-    [MinLength(6, ErrorMessage = "Fjalëkalimi duhet të ketë të paktën 6 karaktere.")]
-    public string Password { get; set; } = string.Empty;
-
-    [Required(ErrorMessage = "Emri i plotë është i detyrueshëm.")]
-    public string FullName { get; set; } = string.Empty;
-
-    public string? Role { get; set; } // Roli opsional (default = Consumer)
-}

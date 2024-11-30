@@ -1,4 +1,5 @@
-﻿using INDUENDUM_API.Models;
+﻿using INDUENDUM_API.Identity.Models;
+using INDUENDUM_API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -115,30 +116,4 @@ public class AuthController : ControllerBase
     }
 }
 
-// Modelet për hyrjen dhe regjistrimin
-public class LoginModel
-{
-    [Required]
-    [EmailAddress]
-    public string Email { get; set; } = string.Empty;
 
-    [Required]
-    [DataType(DataType.Password)]
-    public string Password { get; set; } = string.Empty;
-}
-
-public class RegisterModel
-{
-    [Required]
-    public string FullName { get; set; } = string.Empty;
-
-    [Required]
-    [EmailAddress]
-    public string Email { get; set; } = string.Empty;
-
-    [Required]
-    [DataType(DataType.Password)]
-    public string Password { get; set; } = string.Empty;
-
-    public string Role { get; set; } = "User"; // Default role nëse nuk caktohet
-}
